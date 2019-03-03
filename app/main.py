@@ -56,7 +56,7 @@ def move():
     """
 
     directions = ['up', 'down', 'left', 'right']
-
+    ## DATA
     myX = data['you']['body']['data'][0]['x']
     myY = data['you']['body']['data'][0]['y']
 
@@ -66,18 +66,42 @@ def move():
     xdistToFood = myX - foodX
     ydistToFood = myY - foodY
 
-    if abs(xdistToFood) > abs(ydistToFood):
-        if xdistToFood > 0:
-            direction = 'left'
-        else:
-            direction = 'right'
-    else:
-        if ydistToFood > 0:
-            direction = 'up'
-        else:
-            direction = 'down'
+    mypostions = data['you']['body']['data']
 
-    ##direction = random.choice(directions)
+    def getpriority():
+        if abs(xdistToFood) > abs(ydistToFood):
+            if xdistToFood > 0:
+                ##direction = 'left'
+                prioritizedMove = ['left', 'right', 'up', 'down']
+            else:
+                ##direction = 'right'
+                prioritizedMove = ['right', 'left', 'up', 'down']
+
+        else:
+            if ydistToFood > 0:
+                ##direction = 'up'
+                prioritizedMove = ['up', 'down', 'right', 'left']
+
+            else:
+                ##direction = 'down'
+                prioritizedMove = ['down', 'up', 'right', 'left']
+        return prioritizedMove
+
+    def checkmove(prioritizedMove):
+        for possiblemove in prioritizedMove:
+            if possiblemove in mypostions:
+                direction = prioritizedMove[0]
+                break
+            else:
+                direction = 'up'
+        return direction
+
+
+    prioritizedMove = getpriority()
+    direction = checkmove(prioritizedMove)
+
+
+
 
     print(json.dumps(data))
     return move_response(direction)
