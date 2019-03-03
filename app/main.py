@@ -93,7 +93,7 @@ def move():
                 direction = prioritizedMove[0]
                 break
             else:
-                direction = 'up'
+                direction = 'down'
         return direction
 
 
