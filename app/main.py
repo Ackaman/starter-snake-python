@@ -87,9 +87,9 @@ def move():
                 prioritizedMove = ['down', 'up', 'right', 'left']
         return prioritizedMove
 
-    def checkmove(prioritizedMove):
+    def checkmove(prioritizedMove, mypositions):
         for possiblemove in prioritizedMove:
-            if possiblemove in mypostions:
+            if possiblemove in mypositions:
                 direction = prioritizedMove[0]
                 break
             else:
@@ -98,7 +98,7 @@ def move():
 
 
     prioritizedMove = getpriority()
-    direction = checkmove(prioritizedMove)
+    direction = checkmove(prioritizedMove, mypostions)
 
 
 
