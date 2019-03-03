@@ -54,11 +54,32 @@ def move():
     TODO: Using the data from the endpoint request object, your
             snake AI must choose a direction to move in.
     """
-    print(json.dumps(data))
 
     directions = ['up', 'down', 'left', 'right']
-    direction = random.choice(directions)
 
+    myX = data.you.data[0].x
+    myY = data.you.data[0].y
+
+    foodX = data.food.data[0].x
+    foodY = data.food.data[0].y
+
+    xdistToFood = myX - foodX
+    ydistToFood = myY - foodY
+
+    if abs(xdistToFood) > abs(ydistToFood):
+        if xdistToFood > 0:
+            direction = 'left'
+        else:
+            direction = 'right'
+    else:
+        if ydistToFood > 0:
+            direction = 'up'
+        else:
+            direction = 'down'
+
+    ##direction = random.choice(directions)
+
+    print(json.dumps(data))
     return move_response(direction)
 
 
@@ -84,3 +105,5 @@ if __name__ == '__main__':
         port=os.getenv('PORT', '8080'),
         debug=os.getenv('DEBUG', True)
     )
+
+
