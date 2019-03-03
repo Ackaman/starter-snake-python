@@ -57,11 +57,11 @@ def move():
 
     directions = ['up', 'down', 'left', 'right']
 
-    myX = data['you']['x']
-    myY = data['you']['y']
+    myX = data['you']['body']['data'][0]['x']
+    myY = data['you']['body']['data'][0]['y']
 
-    foodX = data['food']['x']
-    foodY = data['food']['y']
+    foodX = data['food']['data'][0]['x']
+    foodY = data['food']['data'][0]['y']
 
     xdistToFood = myX - foodX
     ydistToFood = myY - foodY
