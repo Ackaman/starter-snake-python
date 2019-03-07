@@ -85,8 +85,9 @@ def move():
     for position in walls:
         stuffToAvoid.append(position)
 
-    x = fst(my_head)
-    y = snd(my_head)
+    x = my_head[0]
+    y = my_head[1]
+
     possiblemoves = []
 
     if (x+1, y) not in stuffToAvoid:
