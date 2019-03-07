@@ -119,8 +119,14 @@ def move():
             elif(ydistancetofood > 0):
                 if 'up' in possiblemoves:
                     direction = 'up'
-    else: direction = random.choice(possiblemoves)
-
+                else:
+                    direction = random.choice(possiblemoves)
+            else:
+                direction = random.choice(possiblemoves)
+       else:
+           direction = random.choice(possiblemoves)
+    else:
+        direction = random.choice(possiblemoves)
 #
 #    elif abs(abs(ydistancetofood) >= abs(xdistancetofood)):
 #        if ydistancetofood > 0:
