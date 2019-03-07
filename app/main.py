@@ -98,7 +98,7 @@ def move():
     if(x, y-1) not in stuffToAvoid:
         possiblemoves.append('up')
 
-    direction = random.choice(possibleMoves)
+    direction = random.choice(possiblemoves)
     return move_response(direction)
 
 @bottle.post('/end')
