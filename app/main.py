@@ -55,50 +55,100 @@ def move():
             snake AI must choose a direction to move in.
     """
 
-    directions = ['up', 'down', 'left', 'right']
-    ## DATA
-    myX = data['you']['body']['data'][0]['x']
-    myY = data['you']['body']['data'][0]['y']
 
-    foodX = data['food']['data'][0]['x']
-    foodY = data['food']['data'][0]['y']
-
-    xdistToFood = myX - foodX
-    ydistToFood = myY - foodY
-
-    mypostions = data['you']['body']['data']
-
-    def getpriority():
-        if abs(xdistToFood) > abs(ydistToFood):
-            if xdistToFood > 0:
-                ##direction = 'left'
-                prioritizedMove = ['left', 'right', 'up', 'down']
-            else:
-                ##direction = 'right'
-                prioritizedMove = ['right', 'left', 'up', 'down']
-
-        else:
-            if ydistToFood > 0:
-                ##direction = 'up'
-                prioritizedMove = ['up', 'down', 'right', 'left']
-
-            else:
-                ##direction = 'down'
-                prioritizedMove = ['down', 'up', 'right', 'left']
-        return prioritizedMove
-
-    def checkmove(prioritizedMove, mypositions):
-        for possiblemove in prioritizedMove:
-            if possiblemove in mypositions:
-                direction = prioritizedMove[0]
-                break
-            else:
-                direction = 'down'
-        return direction
+    ##directions = ['up', 'down', 'left', 'right']
 
 
-    prioritizedMove = getpriority()
-    direction = checkmove(prioritizedMove, mypostions)
+    foodposition = []
+
+    for food in data['food']['data']:
+        foodposition.add(food['x'], food['y'])
+
+    my_head = (data['you']['body']['data'][0]['x'], data['you']['body']['data'][0]['y'])
+
+
+    myPositions = []
+
+    for pos in data['you']['body']['data']:
+        myPositions.add(pos['x'], pos['y'])
+
+    walls = []
+    width = 10
+    for i in width:
+        walls.add(0,i)
+        walls.add(i,0)
+        walls.add(width,i)
+        walls.add(i,width)
+
+
+    def closestFood():
+        foodDistances = []
+        ##Find closest food
+        currentDist = 1000000
+        for i in foodposition:
+            x = fst(i)
+            y = snd(i)
+            dist = ((abs(fst(my_head) - x)) + (abs(snd(my_head) - y)))
+            if (dist < currentDist):
+                closestFoodPos = (x,y)
+                currentDist = dist
+
+
+
+        return closestFoodPos
+
+    closestFoodPos = closestFood()
+
+    def listOfCol():
+        completeList = []
+        completeList.append(myPositions)
+        completeList.append(kanter)
+        ## add all other snakes
+        return completeList
+
+    stuffToAvoid = listOfCol()
+
+    def possibleMoves():
+        x = fst(my_head)
+        y = snd(my_head)
+        possibleMove = []
+
+        if (x+1, y) not in stuffToAvoid:
+            possibleMove.add('right')
+        if (x, y+1) not in stuffToAvoid:
+            possibleMove.add('down')
+        if(x-1, y) not in stuffToAvoid:
+            possibleMove.add('left')
+        if(x, y-1) not in stuffToAvoid:
+            possibleMove.add('up')
+    return possibleMove
+
+
+
+    WHERETOGO = possibleMoves()
+    direction = random.choice(WHERETOGO)
+
+
+
+
+
+
+
+
+
+    ##foodX = data['food']['data'][0]['x']
+    ##foodY = data['food']['data'][0]['y']
+
+    ##xdistToFood = myX - foodX
+    ##ydistToFood = myY - foodY
+
+    ##mypostions = data['you']['body']['data']
+
+
+
+
+
+
 
 
 
