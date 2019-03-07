@@ -136,7 +136,7 @@ def move():
 #                if 'left' in possiblemoves:
 #                    direction = 'left'
 #    else:
-    #direction = random.choice(possiblemoves)
+    direction = random.choice(possiblemoves)
 
     return move_response(direction)
 
