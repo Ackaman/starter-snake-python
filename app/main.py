@@ -49,7 +49,7 @@ def start():
 @bottle.post('/move')
 def move():
     data = bottle.request.json
-
+    return move_response('right')
     """
     TODO: Using the data from the endpoint request object, your
             snake AI must choose a direction to move in.
@@ -58,7 +58,7 @@ def move():
 
     ##directions = ['up', 'down', 'left', 'right']
 
-
+'''
     foodposition = []
 
     for food in data['food']['data']:
@@ -81,23 +81,23 @@ def move():
         walls.add(i,width)
 
 
-    def closestFood():
-        foodDistances = []
-        ##Find closest food
-        currentDist = 1000000
-        for i in foodposition:
-            x = fst(i)
-            y = snd(i)
-            dist = ((abs(fst(my_head) - x)) + (abs(snd(my_head) - y)))
-            if (dist < currentDist):
-                closestFoodPos = (x,y)
-                currentDist = dist
+    ##def closestFood():
+    ##    foodDistances = []
+    ##    ##Find closest food
+    ##    currentDist = 1000000
+    ##    for i in foodposition:
+    ##        x = fst(i)
+    ##        y = snd(i)
+    ##        dist = ((abs(fst(my_head) - x)) + (abs(snd(my_head) - y)))
+    ##        if (dist < currentDist):
+     ##           closestFoodPos = (x,y)
+      ##          currentDist = dist
 
 
 
-        return closestFoodPos
+    ##    return closestFoodPos
 
-    closestFoodPos = closestFood()
+  ##  closestFoodPos = closestFood()
 
     def listOfCol():
         completeList = []
@@ -153,8 +153,8 @@ def move():
 
 
 
-    print(json.dumps(data))
-    return move_response(direction)
+    '''
+    ##return move_response('right')
 
 
 @bottle.post('/end')
