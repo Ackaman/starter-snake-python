@@ -99,8 +99,40 @@ def move():
     if(x, y-1) not in stuffToAvoid:
         possiblemoves.append('up')
 
-    direction = random.choice(possiblemoves)
+    foodDistances = []
+    ##Find closest food
+    currentDist = 1000000
+    for i in foodposition:
+        x = fst(i)
+        y = snd(i)
+        dist = ((abs(fst(my_head) - x)) + (abs(snd(my_head) - y)))
+        if (dist < currentDist):
+            closestFoodPos = (x, y)
+            currentDist = dist
+
+    xdistancetofood = x - closestFoodPos[0]
+    ydistancetofood = y - closestFoodPos[1]
+
+    if abs(xdistancetofood > ydistancetofood):
+        if xdistancetofood > 0:
+            if 'left' in possiblemoves:
+                direction = 'left'
+            elif(ydistancetofood > 0):
+                if 'up' in possiblemoves:
+                    direction = 'up'
+
+    elif abs(ydistancetofood >= xdistancetofood):
+        if ydistancetofood > 0:
+            if 'up' in possiblemoves:
+                direction = 'up'
+            elif(xdistancetofood > 0):
+                if 'left' in possiblemoves:
+                    direction = 'left'
+    else:
+        direction = random.choice(possiblemoves)
+
     return move_response(direction)
+
 
 @bottle.post('/end')
 def end():
