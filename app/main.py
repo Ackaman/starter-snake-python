@@ -57,11 +57,15 @@ def move():
 
     my_head = (data['you']['body']['data'][0]['x'], data['you']['body']['data'][0]['y'])
 
-
+    snakePositions = []
     myPositions = []
 
     for pos in data['you']['body']['data']:
         myPositions.append((pos['x'], pos['y']))
+
+
+    for pos in data['snakes']['data']['body']['data']:
+        snakePositions.append((pos['x'], pos['y']))
 
     walls = []
     width = data['height']
@@ -78,10 +82,15 @@ def move():
     ##stuffToAvoid.append(walls)
     ## add all other snakes
 
+
+
     for position in myPositions:
         stuffToAvoid.append(position)
 
     for position in walls:
+        stuffToAvoid.append(position)
+
+    for position in snakePositions:
         stuffToAvoid.append(position)
 
     x = my_head[0]
