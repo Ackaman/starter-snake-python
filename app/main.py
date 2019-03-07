@@ -49,20 +49,11 @@ def start():
 @bottle.post('/move')
 def move():
     data = bottle.request.json
-    return move_response('right')
-    """
-    TODO: Using the data from the endpoint request object, your
-            snake AI must choose a direction to move in.
-    """
 
-
-    ##directions = ['up', 'down', 'left', 'right']
-
-'''
     foodposition = []
 
     for food in data['food']['data']:
-        foodposition.add(food['x'], food['y'])
+        foodposition.append(food['x'], food['y'])
 
     my_head = (data['you']['body']['data'][0]['x'], data['you']['body']['data'][0]['y'])
 
@@ -70,92 +61,45 @@ def move():
     myPositions = []
 
     for pos in data['you']['body']['data']:
-        myPositions.add(pos['x'], pos['y'])
+        myPositions.append(pos['x'], pos['y'])
 
     walls = []
-    width = 10
-    for i in width:
-        walls.add(0,i)
-        walls.add(i,0)
-        walls.add(width,i)
-        walls.add(i,width)
-
-
-    ##def closestFood():
-    ##    foodDistances = []
-    ##    ##Find closest food
-    ##    currentDist = 1000000
-    ##    for i in foodposition:
-    ##        x = fst(i)
-    ##        y = snd(i)
-    ##        dist = ((abs(fst(my_head) - x)) + (abs(snd(my_head) - y)))
-    ##        if (dist < currentDist):
-     ##           closestFoodPos = (x,y)
-      ##          currentDist = dist
-
-
-
-    ##    return closestFoodPos
-
-  ##  closestFoodPos = closestFood()
-
-    def listOfCol():
-        completeList = []
-        completeList.append(myPositions)
-        completeList.append(kanter)
-        ## add all other snakes
-        return completeList
-
-    stuffToAvoid = listOfCol()
-
-    def possibleMoves():
-        x = fst(my_head)
-        y = snd(my_head)
-        possibleMove = []
-
-        if (x+1, y) not in stuffToAvoid:
-            possibleMove.add('right')
-        if (x, y+1) not in stuffToAvoid:
-            possibleMove.add('down')
-        if(x-1, y) not in stuffToAvoid:
-            possibleMove.add('left')
-        if(x, y-1) not in stuffToAvoid:
-            possibleMove.add('up')
-    return possibleMove
-
-
-
-    WHERETOGO = possibleMoves()
-    direction = random.choice(WHERETOGO)
+    width = data['height']
+    for i in range(width):
+        walls.append((0,i))
+        walls.append((i,0))
+        walls.append((width,i))
+        walls.append((i,width))
 
 
 
 
+    stuffToAvoid = []
+    ##stuffToAvoid.append(myPositions)
+    ##stuffToAvoid.append(walls)
+    ## add all other snakes
 
+    for position in myPositions:
+        stuffToAvoid.append(position)
 
+    for position in walls:
+        stuffToAvoid.append(position)
 
+    x = fst(my_head)
+    y = snd(my_head)
+    possiblemoves = []
 
+    if (x+1, y) not in stuffToAvoid:
+        possiblemoves.append('right')
+    if (x, y+1) not in stuffToAvoid:
+        possiblemoves.append('down')
+    if(x-1, y) not in stuffToAvoid:
+        possiblemoves.append('left')
+    if(x, y-1) not in stuffToAvoid:
+        possiblemoves.append('up')
 
-    ##foodX = data['food']['data'][0]['x']
-    ##foodY = data['food']['data'][0]['y']
-
-    ##xdistToFood = myX - foodX
-    ##ydistToFood = myY - foodY
-
-    ##mypostions = data['you']['body']['data']
-
-
-
-
-
-
-
-
-
-
-    '''
-    ##return move_response('right')
-
+    direction = random.choice(possibleMoves)
+    return move_response(direction)
 
 @bottle.post('/end')
 def end():
