@@ -103,11 +103,11 @@ def move():
     ##Find closest food
     currentDist = 1000000
     for i in foodposition:
-        x = i[0]
-        y = i[1]
-        dist = ((abs(my_head[0] - x)) + (abs((my_head[1]) - y)))
+        xfood = i[0]
+        yfood = i[1]
+        dist = ((abs(my_head[0] - xfood)) + (abs((my_head[1]) - yfood)))
         if (dist < currentDist):
-            closestFoodPos = (x, y)
+            closestFoodPos = (xfood, yfood)
             currentDist = dist
 
     xdistancetofood = x - closestFoodPos[0]
