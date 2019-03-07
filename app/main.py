@@ -53,7 +53,7 @@ def move():
     foodposition = []
 
     for food in data['food']['data']:
-        foodposition.append(food['x'], food['y'])
+        foodposition.append((food['x'], food['y']))
 
     my_head = (data['you']['body']['data'][0]['x'], data['you']['body']['data'][0]['y'])
 
@@ -61,7 +61,7 @@ def move():
     myPositions = []
 
     for pos in data['you']['body']['data']:
-        myPositions.append(pos['x'], pos['y'])
+        myPositions.append((pos['x'], pos['y']))
 
     walls = []
     width = data['height']
