@@ -105,7 +105,7 @@ def move():
     for i in foodposition:
         x = fst(i)
         y = snd(i)
-        dist = ((abs(fst(my_head) - x)) + (abs(snd(my_head) - y)))
+        dist = ((abs(my_head[0] - x)) + (abs((my_head[1]) - y)))
         if (dist < currentDist):
             closestFoodPos = (x, y)
             currentDist = dist
