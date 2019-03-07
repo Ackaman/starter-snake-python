@@ -73,7 +73,6 @@ def move():
 
 
 
-
     stuffToAvoid = []
     ##stuffToAvoid.append(myPositions)
     ##stuffToAvoid.append(walls)
@@ -113,23 +112,23 @@ def move():
     xdistancetofood = x - closestFoodPos[0]
     ydistancetofood = y - closestFoodPos[1]
 
-    if abs(xdistancetofood > ydistancetofood):
-        if xdistancetofood > 0:
-            if 'left' in possiblemoves:
-                direction = 'left'
-            elif(ydistancetofood > 0):
-                if 'up' in possiblemoves:
-                    direction = 'up'
-
-    elif abs(ydistancetofood >= xdistancetofood):
-        if ydistancetofood > 0:
-            if 'up' in possiblemoves:
-                direction = 'up'
-            elif(xdistancetofood > 0):
-                if 'left' in possiblemoves:
-                    direction = 'left'
-    else:
-        direction = random.choice(possiblemoves)
+##    if abs(xdistancetofood > ydistancetofood):
+##       if xdistancetofood > 0:
+##            if 'left' in possiblemoves:
+##                direction = 'left'
+#            elif(ydistancetofood > 0):
+#                if 'up' in possiblemoves:
+#                    direction = 'up'
+#
+#    elif abs(ydistancetofood >= xdistancetofood):
+#        if ydistancetofood > 0:
+#            if 'up' in possiblemoves:
+#                direction = 'up'
+#            elif(xdistancetofood > 0):
+#                if 'left' in possiblemoves:
+#                    direction = 'left'
+#    else:
+    direction = random.choice(possiblemoves)
 
     return move_response(direction)
 
