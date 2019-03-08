@@ -5,6 +5,9 @@ import bottle
 
 from api import ping_response, start_response, move_response, end_response
 
+#Moving towards a tail is safe as long as that snake does not have food witihn reach.
+#If it is te only possible move, that move should be made anyway
+
 
 @bottle.route('/')
 def index():
@@ -89,8 +92,8 @@ def move():
     for position in walls:
         stuffToAvoid.append(position)
 
-    for position in snakePositions:
-        stuffToAvoid.append(position)
+    #for position in snakePositions:
+    #    stuffToAvoid.append(position)
 
     x = my_head[0]
     y = my_head[1]
@@ -144,6 +147,8 @@ def move():
     #                if 'left' in possiblemoves:
     #                    direction = 'left'
     #    else:
+
+
     direction = random.choice(possiblemoves)
 
     return move_response(direction)
