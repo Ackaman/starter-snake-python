@@ -111,15 +111,14 @@ def move():
     if (xhead, yhead - 1) not in stuffToAvoid:
         possiblemoves.append('up')
 
-    foodDistances = []
     ##Find closest food
     currentDist = 1000000
 
     for i in foodposition:
         xfood = i[0]
         yfood = i[1]
-        dist = ((abs(my_head[0] - xfood)) + (abs((my_head[1]) - yfood)))
-        if (dist <= currentDist):
+        dist = ((abs(xhead - xfood)) + (abs(yhead - yfood)))
+        if (dist < currentDist):
             closestFoodPos = (xfood, yfood)
             currentDist = dist
 
@@ -133,14 +132,12 @@ def move():
 
     if (xdistancetofood >= ydistancetofood) and xhead - closestFoodPos[0] < 0 and 'right' in possiblemoves:
         prioritymoves.append('right')
-    elif (xdistancetofood >= ydistancetofood) and xhead - closestFoodPos[0] > 0 and 'left' in possiblemoves:
+    if (xdistancetofood >= ydistancetofood) and xhead - closestFoodPos[0] > 0 and 'left' in possiblemoves:
         prioritymoves.append('left')
-    elif (ydistancetofood >= xdistancetofood) and yhead - closestFoodPos[1] > 0 and 'up' in possiblemoves:
+    if (ydistancetofood >= xdistancetofood) and yhead - closestFoodPos[1] > 0 and 'up' in possiblemoves:
         prioritymoves.append('up')
-    elif (ydistancetofood >= xdistancetofood) and yhead - closestFoodPos[1] < 0 and 'down' in possiblemoves:
+    if (ydistancetofood >= xdistancetofood) and yhead - closestFoodPos[1] < 0 and 'down' in possiblemoves:
         prioritymoves.append('down')
-    else:
-        prioritymoves.append(random.choice(possiblemoves))
 
     direction = prioritymoves[0]
 
