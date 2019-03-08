@@ -80,11 +80,11 @@ def move():
 
     walls = []
     width = data['height']
-    for i in range(width):
-        walls.append((0, i-1))
-        walls.append((i-1, 0))
-        walls.append((width-1, i-1))
-        walls.append((i-1, width-1))
+    for i in range(width+1):
+        walls.append((0-1, i))
+        walls.append((i, 0-1))
+        walls.append((width, i))
+        walls.append((i, width))
 
     stuffToAvoid = []
 
