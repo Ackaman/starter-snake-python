@@ -5,8 +5,9 @@ import bottle
 
 from api import ping_response, start_response, move_response, end_response
 
-#Moving towards a tail is safe as long as that snake does not have food witihn reach.
-#If it is te only possible move, that move should be made anyway
+
+# Moving towards a tail is safe as long as that snake does not have food witihn reach.
+# If it is te only possible move, that move should be made anyway
 
 
 @bottle.route('/')
@@ -74,8 +75,7 @@ def move():
         for pos in snakes['body']['data']:
             snakePositions.append((pos['x'], pos['y']))
 
-
-    #for pos in data['snakes']['data'][0]['body']['data']:
+    # for pos in data['snakes']['data'][0]['body']['data']:
     #    snakePositions.append((pos['x'], pos['y']))
 
     walls = []
@@ -97,18 +97,18 @@ def move():
     for position in snakePositions:
         stuffToAvoid.append(position)
 
-    x = my_head[0]
-    y = my_head[1]
+    xhead = my_head[0]
+    yhead = my_head[1]
 
     possiblemoves = []
 
-    if (x + 1, y) not in stuffToAvoid:
+    if (xhead + 1, yhead) not in stuffToAvoid:
         possiblemoves.append('right')
-    if (x, y + 1) not in stuffToAvoid:
+    if (xhead, yhead + 1) not in stuffToAvoid:
         possiblemoves.append('down')
-    if (x - 1, y) not in stuffToAvoid:
+    if (xhead - 1, yhead) not in stuffToAvoid:
         possiblemoves.append('left')
-    if (x, y - 1) not in stuffToAvoid:
+    if (xhead, yhead - 1) not in stuffToAvoid:
         possiblemoves.append('up')
 
     foodDistances = []
@@ -123,12 +123,16 @@ def move():
             closestFoodPos = (xfood, yfood)
             currentDist = dist
 
-    xdistancetofood = x - closestFoodPos[0]
-    ydistancetofood = y - closestFoodPos[1]
+    xdistancetofood = xhead - closestFoodPos[0]
+    ydistancetofood = yhead - closestFoodPos[1]
+
+    if (xdistancetofood >= ydistancetofood) and xhead - xdistancetofood < 0 and 'right' in possiblemoves:
+        direction = 'right'
+    else:
+        direction = random.choice(possiblemoves)
 
 
-
-    direction = random.choice(possiblemoves)
+    # direction = random.choice(possiblemoves)
 
     return move_response(direction)
 
