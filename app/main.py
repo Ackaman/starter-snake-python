@@ -70,8 +70,13 @@ def move():
     for pos in data['you']['body']['data']:
         myPositions.append((pos['x'], pos['y']))
 
-    for pos in data['snakes']['data']['body']['data']:
-        snakePositions.append((pos['x'], pos['y']))
+    for snakes in data['snakes']['data']:
+        for pos in data['snakes']['data'][snakes]['body']['data']:
+            snakePositions.append((pos['x'], pos['y']))
+
+
+    #for pos in data['snakes']['data'][0]['body']['data']:
+    #    snakePositions.append((pos['x'], pos['y']))
 
     walls = []
     width = data['height']
@@ -82,9 +87,6 @@ def move():
         walls.append((i, width))
 
     stuffToAvoid = []
-    ##stuffToAvoid.append(myPositions)
-    ##stuffToAvoid.append(walls)
-    ## add all other snakes
 
     for position in myPositions:
         stuffToAvoid.append(position)
@@ -92,8 +94,8 @@ def move():
     for position in walls:
         stuffToAvoid.append(position)
 
-    #for position in snakePositions:
-    #    stuffToAvoid.append(position)
+    for position in snakePositions:
+        stuffToAvoid.append(position)
 
     x = my_head[0]
     y = my_head[1]
@@ -112,6 +114,7 @@ def move():
     foodDistances = []
     ##Find closest food
     currentDist = 1000000
+
     for i in foodposition:
         xfood = i[0]
         yfood = i[1]
@@ -123,30 +126,6 @@ def move():
     xdistancetofood = x - closestFoodPos[0]
     ydistancetofood = y - closestFoodPos[1]
 
-    #    if (abs(xdistancetofood) > abs(ydistancetofood)):
-    #       if xdistancetofood > 0:
-    #            if 'left' in possiblemoves:
-    #                direction = 'left'
-    #            elif(ydistancetofood > 0):
-    #                if 'up' in possiblemoves:
-    ##                    direction = 'up'
-    #               else:
-    #                   direction = random.choice(possiblemoves)
-    #           else:
-    #               direction = random.choice(possiblemoves)
-    #      else:
-    #          direction = random.choice(possiblemoves)
-    #   else:
-    #       direction = random.choice(possiblemoves)
-    #
-    #    elif abs(abs(ydistancetofood) >= abs(xdistancetofood)):
-    #        if ydistancetofood > 0:
-    #            if 'up' in possiblemoves:
-    #                direction = 'up'
-    #            elif(xdistancetofood > 0):
-    #                if 'left' in possiblemoves:
-    #                    direction = 'left'
-    #    else:
 
 
     direction = random.choice(possiblemoves)
