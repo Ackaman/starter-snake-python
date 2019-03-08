@@ -122,8 +122,8 @@ def move():
             closestFoodPos = (xfood, yfood)
             currentDist = dist
 
-    xdistancetofood = xhead - closestFoodPos[0]
-    ydistancetofood = yhead - closestFoodPos[1]
+    xdistancetofood = abs(xhead - closestFoodPos[0])
+    ydistancetofood = abs(yhead - closestFoodPos[1])
 
     foodtotheright = ((xhead - closestFoodPos[0]) < 0)
     foodtothetop   = ((yhead - closestFoodPos[1]) > 0)
@@ -134,6 +134,7 @@ def move():
         prioritymoves.append('right')
     if (xdistancetofood >= ydistancetofood) and ((xhead - closestFoodPos[0]) > 0) and 'left' in possiblemoves:
         prioritymoves.append('left')
+
     if (ydistancetofood >= xdistancetofood) and ((yhead - closestFoodPos[1]) > 0) and 'up' in possiblemoves:
         prioritymoves.append('up')
     if (ydistancetofood >= xdistancetofood) and ((yhead - closestFoodPos[1]) < 0) and 'down' in possiblemoves:
