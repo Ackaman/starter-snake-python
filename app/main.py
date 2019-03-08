@@ -131,13 +131,13 @@ def move():
 
     prioritymoves = []
 
-    if (xdistancetofood >= ydistancetofood) and xhead - xdistancetofood < 0:
+    if (xdistancetofood >= ydistancetofood) and xhead - closestFoodPos[0] < 0:
         prioritymoves.append('right')
-    elif (xdistancetofood >= ydistancetofood) and xhead - xdistancetofood > 0:
+    elif (xdistancetofood >= ydistancetofood) and xhead - closestFoodPos[0] > 0:
         prioritymoves.append('left')
-    elif (ydistancetofood >= xdistancetofood) and yhead - ydistancetofood > 0:
+    elif (ydistancetofood >= xdistancetofood) and yhead - closestFoodPos[1] > 0:
         prioritymoves.append('up')
-    elif (ydistancetofood >= xdistancetofood) and yhead - ydistancetofood < 0:
+    elif (ydistancetofood >= xdistancetofood) and yhead - closestFoodPos[1] < 0:
         prioritymoves.append('down')
 
 
