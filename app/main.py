@@ -119,7 +119,7 @@ def move():
         xfood = i[0]
         yfood = i[1]
         dist = ((abs(my_head[0] - xfood)) + (abs((my_head[1]) - yfood)))
-        if (dist < currentDist):
+        if (dist <= currentDist):
             closestFoodPos = (xfood, yfood)
             currentDist = dist
 
