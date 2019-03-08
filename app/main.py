@@ -70,9 +70,9 @@ def move():
     for pos in data['you']['body']['data']:
         myPositions.append((pos['x'], pos['y']))
 
-    #for snakes in data['snakes']['data']:
-    #    for pos in data['snakes']['data'][snakes]['body']['data']:
-    #        snakePositions.append((pos['x'], pos['y']))
+    for snakes in data['snakes']['data']:
+        for pos in snakes['body']['data']:
+            snakePositions.append((pos['x'], pos['y']))
 
 
     #for pos in data['snakes']['data'][0]['body']['data']:
