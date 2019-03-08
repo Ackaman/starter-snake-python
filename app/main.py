@@ -130,15 +130,16 @@ def move():
 
     prioritymoves = []
 
-    if (xdistancetofood >= ydistancetofood) and xhead - closestFoodPos[0] < 0 and 'right' in possiblemoves:
+    if (xdistancetofood >= ydistancetofood) and ((xhead - closestFoodPos[0]) < 0) and 'right' in possiblemoves:
         prioritymoves.append('right')
-    if (xdistancetofood >= ydistancetofood) and xhead - closestFoodPos[0] > 0 and 'left' in possiblemoves:
+    if (xdistancetofood >= ydistancetofood) and ((xhead - closestFoodPos[0]) > 0) and 'left' in possiblemoves:
         prioritymoves.append('left')
-    if (ydistancetofood >= xdistancetofood) and yhead - closestFoodPos[1] > 0 and 'up' in possiblemoves:
+    if (ydistancetofood >= xdistancetofood) and ((yhead - closestFoodPos[1]) > 0) and 'up' in possiblemoves:
         prioritymoves.append('up')
-    if (ydistancetofood >= xdistancetofood) and yhead - closestFoodPos[1] < 0 and 'down' in possiblemoves:
+    if (ydistancetofood >= xdistancetofood) and ((yhead - closestFoodPos[1]) < 0) and 'down' in possiblemoves:
         prioritymoves.append('down')
 
+    prioritymoves.append(random.choice(possiblemoves))
     direction = prioritymoves[0]
 
     #for move in prioritymoves:
