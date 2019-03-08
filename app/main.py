@@ -5,12 +5,14 @@ import bottle
 
 from api import ping_response, start_response, move_response, end_response
 
+
 @bottle.route('/')
 def index():
     return '''
     Battlesnake documentation can be found at
        <a href="https://docs.battlesnake.io">https://docs.battlesnake.io</a>.
     '''
+
 
 @bottle.route('/static/<path:path>')
 def static(path):
@@ -22,6 +24,7 @@ def static(path):
     """
     return bottle.static_file(path, root='static/')
 
+
 @bottle.post('/ping')
 def ping():
     """
@@ -29,6 +32,7 @@ def ping():
     such as Heroku, from sleeping the application instance.
     """
     return ping_response()
+
 
 @bottle.post('/start')
 def start():
@@ -63,26 +67,21 @@ def move():
     for pos in data['you']['body']['data']:
         myPositions.append((pos['x'], pos['y']))
 
-
     for pos in data['snakes']['data']['body']['data']:
         snakePositions.append((pos['x'], pos['y']))
 
     walls = []
     width = data['height']
     for i in range(width):
-        walls.append((0,i))
-        walls.append((i,0))
-        walls.append((width,i))
-        walls.append((i,width))
-
-
+        walls.append((0, i))
+        walls.append((i, 0))
+        walls.append((width, i))
+        walls.append((i, width))
 
     stuffToAvoid = []
     ##stuffToAvoid.append(myPositions)
     ##stuffToAvoid.append(walls)
     ## add all other snakes
-
-
 
     for position in myPositions:
         stuffToAvoid.append(position)
@@ -98,13 +97,13 @@ def move():
 
     possiblemoves = []
 
-    if (x+1, y) not in stuffToAvoid:
+    if (x + 1, y) not in stuffToAvoid:
         possiblemoves.append('right')
-    if (x, y+1) not in stuffToAvoid:
+    if (x, y + 1) not in stuffToAvoid:
         possiblemoves.append('down')
-    if(x-1, y) not in stuffToAvoid:
+    if (x - 1, y) not in stuffToAvoid:
         possiblemoves.append('left')
-    if(x, y-1) not in stuffToAvoid:
+    if (x, y - 1) not in stuffToAvoid:
         possiblemoves.append('up')
 
     foodDistances = []
@@ -121,30 +120,30 @@ def move():
     xdistancetofood = x - closestFoodPos[0]
     ydistancetofood = y - closestFoodPos[1]
 
-#    if (abs(xdistancetofood) > abs(ydistancetofood)):
-#       if xdistancetofood > 0:
-#            if 'left' in possiblemoves:
-#                direction = 'left'
-#            elif(ydistancetofood > 0):
-#                if 'up' in possiblemoves:
-##                    direction = 'up'
- #               else:
- #                   direction = random.choice(possiblemoves)
- #           else:
- #               direction = random.choice(possiblemoves)
- #      else:
- #          direction = random.choice(possiblemoves)
- #   else:
- #       direction = random.choice(possiblemoves)
-#
-#    elif abs(abs(ydistancetofood) >= abs(xdistancetofood)):
-#        if ydistancetofood > 0:
-#            if 'up' in possiblemoves:
-#                direction = 'up'
-#            elif(xdistancetofood > 0):
-#                if 'left' in possiblemoves:
-#                    direction = 'left'
-#    else:
+    #    if (abs(xdistancetofood) > abs(ydistancetofood)):
+    #       if xdistancetofood > 0:
+    #            if 'left' in possiblemoves:
+    #                direction = 'left'
+    #            elif(ydistancetofood > 0):
+    #                if 'up' in possiblemoves:
+    ##                    direction = 'up'
+    #               else:
+    #                   direction = random.choice(possiblemoves)
+    #           else:
+    #               direction = random.choice(possiblemoves)
+    #      else:
+    #          direction = random.choice(possiblemoves)
+    #   else:
+    #       direction = random.choice(possiblemoves)
+    #
+    #    elif abs(abs(ydistancetofood) >= abs(xdistancetofood)):
+    #        if ydistancetofood > 0:
+    #            if 'up' in possiblemoves:
+    #                direction = 'up'
+    #            elif(xdistancetofood > 0):
+    #                if 'left' in possiblemoves:
+    #                    direction = 'left'
+    #    else:
     direction = random.choice(possiblemoves)
 
     return move_response(direction)
@@ -162,6 +161,7 @@ def end():
 
     return end_response()
 
+
 # Expose WSGI app (so gunicorn can find it)
 application = bottle.default_app()
 
@@ -172,5 +172,3 @@ if __name__ == '__main__':
         port=os.getenv('PORT', '8080'),
         debug=os.getenv('DEBUG', True)
     )
-
-
