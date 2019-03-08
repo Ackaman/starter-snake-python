@@ -140,8 +140,10 @@ def move():
     elif (ydistancetofood >= xdistancetofood) and yhead - closestFoodPos[1] < 0:
         prioritymoves.append('down')
 
-
-    direction = prioritymoves[0]
+    if prioritymoves[0] not in possiblemoves:
+        direction = random.choice(possiblemoves)
+    else:
+        direction = prioritymoves[0]
 
     #for move in prioritymoves:
     #    if move in possiblemoves:
