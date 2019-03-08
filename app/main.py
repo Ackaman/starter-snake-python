@@ -81,10 +81,10 @@ def move():
     walls = []
     width = data['height']
     for i in range(width):
-        walls.append((0, i))
-        walls.append((i, 0))
-        walls.append((width, i))
-        walls.append((i, width))
+        walls.append((0, i-1))
+        walls.append((i-1, 0))
+        walls.append((width-1, i-1))
+        walls.append((i-1, width-1))
 
     stuffToAvoid = []
 
@@ -132,11 +132,13 @@ def move():
 
     if (xdistancetofood >= ydistancetofood) and ((xhead - closestFoodPos[0]) < 0) and 'right' in possiblemoves:
         prioritymoves.append('right')
+
     if (xdistancetofood >= ydistancetofood) and ((xhead - closestFoodPos[0]) > 0) and 'left' in possiblemoves:
         prioritymoves.append('left')
 
     if (ydistancetofood >= xdistancetofood) and ((yhead - closestFoodPos[1]) > 0) and 'up' in possiblemoves:
         prioritymoves.append('up')
+
     if (ydistancetofood >= xdistancetofood) and ((yhead - closestFoodPos[1]) < 0) and 'down' in possiblemoves:
         prioritymoves.append('down')
 
