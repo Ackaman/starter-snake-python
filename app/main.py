@@ -84,7 +84,6 @@ def move():
         for pos in snakes['body']['data']: ## alla ormens positioner
             snakePositions.append((pos['x'], pos['y']))
 
-    snake_heads_area = snake_head_area(snake_heads, my_head)
 
 
     walls = []
@@ -96,7 +95,9 @@ def move():
         walls.append((i, width))
 
     stuffToAvoid = []
-    stuffToAvoid.append(snake_heads_area)
+    
+    for heads in snake_heads:
+        stuffToAvoid.append(heads)
 
     for position in myPositions:
         stuffToAvoid.append(position)
@@ -199,18 +200,18 @@ def safe_path(x, y, stuffToAvoid):
 
     return safe
 
-def snake_head_area(snake_heads, my_head):
-    avoid_heads = []
-    snake_heads1 = snake_heads
-    snake_heads1.remove(my_head)
-
-    for heads in snake_heads1:
-        avoid_heads.append((heads[0]+1, heads[1]))
-        avoid_heads.append((heads[0] - 1, heads[1]))
-        avoid_heads.append((heads[0], heads[1] + 1))
-        avoid_heads.append((heads[0], heads[1] - 1))
-
-    return avoid_heads
+##def snake_head_area(snake_heads, my_head):
+##    avoid_heads = []
+##    snake_heads1 = snake_heads
+##    snake_heads1.remove(my_head)
+##
+##    for heads in snake_heads1:
+##        avoid_heads.append((heads[0]+1, heads[1]))
+##        avoid_heads.append((heads[0] - 1, heads[1]))
+##        avoid_heads.append((heads[0], heads[1] + 1))
+##        avoid_heads.append((heads[0], heads[1] - 1))
+##
+##    return avoid_heads
 
 
 
