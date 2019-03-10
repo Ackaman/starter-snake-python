@@ -200,12 +200,15 @@ def safe_path(x, y, stuffToAvoid):
 
 def snake_head_area(snake_heads, my_head):
     avoid_heads = []
-    for heads in snake_heads:
+    snake_heads1 = snake_heads
+    snake_heads1.remove(my_head)
+
+    for heads in snake_heads1:
         avoid_heads.append((heads[0]+1, heads[1]))
         avoid_heads.append((heads[0] - 1, heads[1]))
         avoid_heads.append((heads[0], heads[1] + 1))
         avoid_heads.append((heads[0], heads[1] - 1))
-    avoid_heads.remove(my_head)
+    
     return avoid_heads
 
 
