@@ -155,7 +155,12 @@ def move():
 
 def safe_path(x, y, stuffToAvoid):
 
-    if ((x + 1), y) and ((x - 1), y) and (x, (y + 1)) and (x, (y - 1)) in stuffToAvoid:
+    right = (x+1, y)
+    left = (x-1, y)
+    down = (x, y+1)
+    up = (x, y-1)
+
+    if right in stuffToAvoid and left in stuffToAvoid and down in stuffToAvoid and up in stuffToAvoid:
         safe = False
     else:
         safe = True
