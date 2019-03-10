@@ -96,6 +96,7 @@ def move():
         walls.append((i, width))
 
     stuffToAvoid = []
+    stuffToAvoid.append(snake_heads_area)
 
     for position in myPositions:
         stuffToAvoid.append(position)
@@ -154,23 +155,23 @@ def move():
 
 
 
-    if (xhead + 1, yhead) in snake_heads_area and 'right' in prioritymoves:
-        prioritymoves.remove('right')
+    #if (xhead + 1, yhead) in snake_heads_area and 'right' in prioritymoves:
+    #    prioritymoves.remove('right')
         #prioritymoves.append('right')
 
 
-    if (xhead - 1, yhead) in snake_heads_area and 'left' in prioritymoves:
-        prioritymoves.remove('left')
+    #if (xhead - 1, yhead) in snake_heads_area and 'left' in prioritymoves:
+    #    prioritymoves.remove('left')
         #prioritymoves.append('left')
 
 
-    if (xhead, yhead + 1) in snake_heads_area and 'down' in prioritymoves:
-        prioritymoves.remove('down')
+    #if (xhead, yhead + 1) in snake_heads_area and 'down' in prioritymoves:
+    #    prioritymoves.remove('down')
         #prioritymoves.append('down')
 
 
-    if (xhead, yhead - 1) in snake_heads_area and 'up' in prioritymoves:
-        prioritymoves.remove('up')
+    #if (xhead, yhead - 1) in snake_heads_area and 'up' in prioritymoves:
+    #    prioritymoves.remove('up')
         #prioritymoves.append('up')
 
 
@@ -208,7 +209,7 @@ def snake_head_area(snake_heads, my_head):
         avoid_heads.append((heads[0] - 1, heads[1]))
         avoid_heads.append((heads[0], heads[1] + 1))
         avoid_heads.append((heads[0], heads[1] - 1))
-    
+
     return avoid_heads
 
 
