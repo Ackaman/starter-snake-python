@@ -208,7 +208,7 @@ def snake_head_area(snake_heads):
         avoid_heads.append((heads[0] - 1, heads[1]))
         avoid_heads.append((heads[0], heads[1] + 1))
         avoid_heads.append((heads[0], heads[1] - 1))
-    return avoidheads
+    return avoid_heads
 
 
 
