@@ -178,6 +178,8 @@ def safe_path(x, y, stuffToAvoid):
 
     if x+1 and x-1 and y+1 and y-1 in stuffToAvoid:
         safe = False
+        
+    return safe
 
 
 #def safetyLevel(x,y, stuffToAvoid):
