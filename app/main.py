@@ -179,7 +179,7 @@ def safe_path(x, y, stuffToAvoid):
     return safe
 
 #Check if an other snakes head is in range. If it's a bigger snake, do not go there.
-def safe_head():
+#def safe_head():
 
 
 
