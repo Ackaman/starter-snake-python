@@ -155,32 +155,28 @@ def move():
 
     if (xhead + 1, yhead) in snake_heads_area and 'right' in prioritymoves:
         prioritymoves.remove('right')
-        prioritymoves.append('right')
+        #prioritymoves.append('right')
 
 
     if (xhead - 1, yhead) in snake_heads_area and 'left' in prioritymoves:
         prioritymoves.remove('left')
-        prioritymoves.append('left')
+        #prioritymoves.append('left')
 
 
     if (xhead, yhead + 1) in snake_heads_area and 'down' in prioritymoves:
         prioritymoves.remove('down')
-        prioritymoves.append('down')
+        #prioritymoves.append('down')
 
 
     if (xhead, yhead - 1) in snake_heads_area and 'up' in prioritymoves:
         prioritymoves.remove('up')
-        prioritymoves.append('up')
+        #prioritymoves.append('up')
 
 
-    # Look if neigbour squares are safe
-
-    #
 
     prioritymoves.append(random.choice(possiblemoves))
     direction = prioritymoves[0]
 
-    # direction = random.choice(possiblemoves)
 
     return move_response(direction)
 
