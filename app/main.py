@@ -69,10 +69,11 @@ def move():
     snakePositions = []
     myPositions = []
 
+
     for pos in data['you']['body']['data']:
         myPositions.append((pos['x'], pos['y']))
 
-    listofsnakelists = []
+
     snake_heads = []
 
     for snakes in data['snakes']['data']: ## alla ormar
