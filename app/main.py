@@ -73,23 +73,18 @@ def move():
         myPositions.append((pos['x'], pos['y']))
 
     listofsnakelists = []
-    snakeHeads = []
+    snake_heads = []
 
     for snakes in data['snakes']['data']: ## alla ormar
         x = (snakes['body']['data'][0]['x'])
         y = (snakes['body']['data'][0]['y'])
-        snakeHeads.append((x,y))
+        snake_heads.append((x,y))
 
         for pos in snakes['body']['data']: ## alla ormens positioner
             snakePositions.append((pos['x'], pos['y']))
 
+    snake_heads_area = snake_head_area(snake_heads)
 
-
-    #(x,y)
-    #for snakes in listofsnakelists:
-    #if listofsnakelists[snake].contains(x,y):
-    #if len(listofsnakelists[snake] < my.lenght:
-    #   kill
 
     walls = []
     width = data['height']
@@ -138,8 +133,8 @@ def move():
     xdistancetofood = abs(xhead - closestFoodPos[0])
     ydistancetofood = abs(yhead - closestFoodPos[1])
 
-    foodtotheright = ((xhead - closestFoodPos[0]) < 0)
-    foodtothetop = ((yhead - closestFoodPos[1]) > 0)
+    #foodtotheright = ((xhead - closestFoodPos[0]) < 0)
+    #foodtothetop = ((yhead - closestFoodPos[1]) > 0)
 
     prioritymoves = []
 
@@ -154,6 +149,29 @@ def move():
 
     if (ydistancetofood >= xdistancetofood) and ((yhead - closestFoodPos[1]) < 0) and 'down' in possiblemoves:
         prioritymoves.append('down')
+
+
+
+
+    if (xhead + 1, yhead) in snake_heads_area and 'right' in prioritymoves:
+        prioritymoves.remove('right')
+        prioritymoves.append('right')
+
+
+    if (xhead - 1, yhead) in snake_heads_area and 'left' in prioritymoves:
+        prioritymoves.remove('left')
+        prioritymoves.append('left')
+
+
+    if (xhead, yhead + 1) in snake_heads_area and 'down' in prioritymoves:
+        prioritymoves.remove('down')
+        prioritymoves.append('down')
+
+
+    if (xhead, yhead - 1) in snake_heads_area and 'up' in prioritymoves:
+        prioritymoves.remove('up')
+        prioritymoves.append('up')
+
 
     # Look if neigbour squares are safe
 
@@ -183,8 +201,14 @@ def safe_path(x, y, stuffToAvoid):
 
     return safe
 
-#Check if an other snakes head is in range. If it's a bigger snake, do not go there.
-#def safe_head():
+def snake_head_area(snake_heads):
+    avoid_heads = []
+    for heads in snake_heads:
+        avoid_heads.append((heads[0]+1, heads[1]))
+        avoid_heads.append((heads[0] - 1, heads[1]))
+        avoid_heads.append((heads[0], heads[1] + 1))
+        avoid_heads.append((heads[0], heads[1] - 1))
+    return avoidheads
 
 
 
