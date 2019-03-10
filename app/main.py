@@ -64,6 +64,7 @@ def move():
         foodposition.append((food['x'], food['y']))
 
     my_head = (data['you']['body']['data'][0]['x'], data['you']['body']['data'][0]['y'])
+    my_length = len((data['you']['body']['data']))
 
     snakePositions = []
     myPositions = []
@@ -71,9 +72,19 @@ def move():
     for pos in data['you']['body']['data']:
         myPositions.append((pos['x'], pos['y']))
 
-    for snakes in data['snakes']['data']:
-        for pos in snakes['body']['data']:
+    listofsnakelists = []
+
+    for snakes in data['snakes']['data']: ## alla ormar
+        for pos in snakes['body']['data']: ## alla ormens positioner
             snakePositions.append((pos['x'], pos['y']))
+            listofsnakelists[snake].append((pos['x'], pos['y']))
+
+
+    #(x,y)
+    #for snakes in listofsnakelists:
+    #if listofsnakelists[snake].contains(x,y):
+    #if len(listofsnakelists[snake] < my.lenght:
+    #   kill
 
     walls = []
     width = data['height']
@@ -166,6 +177,10 @@ def safe_path(x, y, stuffToAvoid):
         safe = True
 
     return safe
+
+#Check if an other snakes head is in range. If it's a bigger snake, do not go there.
+def safe_head():
+
 
 
 # def safetyLevel(x,y, stuffToAvoid):
