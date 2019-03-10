@@ -78,8 +78,8 @@ def move():
     for snakes in data['snakes']['data']: ## alla ormar
         x = (snakes['body']['data'][0]['x'])
         y = (snakes['body']['data'][0]['y'])
-        snakeHeads.append(x,y)
-        
+        snakeHeads.append((x,y))
+
         for pos in snakes['body']['data']: ## alla ormens positioner
             snakePositions.append((pos['x'], pos['y']))
 
