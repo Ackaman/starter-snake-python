@@ -75,8 +75,6 @@ def move():
         for pos in snakes['body']['data']:
             snakePositions.append((pos['x'], pos['y']))
 
-    # for pos in data['snakes']['data'][0]['body']['data']:
-    #    snakePositions.append((pos['x'], pos['y']))
 
     walls = []
     width = data['height']
@@ -102,13 +100,13 @@ def move():
 
     possiblemoves = []
 
-    if (xhead + 1, yhead) not in stuffToAvoid:
+    if (xhead + 1, yhead) not in stuffToAvoid and safe_path(xhead, yhead-1, stuffToAvoid):
         possiblemoves.append('right')
-    if (xhead, yhead + 1) not in stuffToAvoid:
+    if (xhead, yhead + 1) not in stuffToAvoid and safe_path(xhead, yhead-1, stuffToAvoid):
         possiblemoves.append('down')
-    if (xhead - 1, yhead) not in stuffToAvoid:
+    if (xhead - 1, yhead) not in stuffToAvoid and safe_path(xhead, yhead-1, stuffToAvoid):
         possiblemoves.append('left')
-    if (xhead, yhead - 1) not in stuffToAvoid:
+    if (xhead, yhead - 1) not in stuffToAvoid and safe_path(xhead, yhead-1, stuffToAvoid):
         possiblemoves.append('up')
 
     ##Find closest food
@@ -142,14 +140,29 @@ def move():
     if (ydistancetofood >= xdistancetofood) and ((yhead - closestFoodPos[1]) < 0) and 'down' in possiblemoves:
         prioritymoves.append('down')
 
+
+
+
+
+
+    #Look if neigbour squares are safe
+
+
+
+
+
+
+
+
+
+
+
+
+
+    #
+
     prioritymoves.append(random.choice(possiblemoves))
     direction = prioritymoves[0]
-
-    #for move in prioritymoves:
-    #    if move in possiblemoves:
-    #        direction = move
-    #    else:
-    #        direction = random.choice(possiblemoves)
 
 
 
@@ -158,6 +171,19 @@ def move():
     # direction = random.choice(possiblemoves)
 
     return move_response(direction)
+
+#int x,y or tuple (NEXT STEP)
+def safe_path(x, y, stuffToAvoid):
+    safe = True
+
+    if x+1 and x-1 and y+1 and y-1 in stuffToAvoid:
+        safe = False
+
+
+#def safetyLevel(x,y, stuffToAvoid):
+
+
+
 
 
 @bottle.post('/end')
