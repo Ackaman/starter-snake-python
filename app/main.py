@@ -69,22 +69,22 @@ def move():
     snakePositions = []
     myPositions = []
 
-
     for pos in data['you']['body']['data']:
         myPositions.append((pos['x'], pos['y']))
 
-
     snake_heads = []
 
-    for snakes in data['snakes']['data']: ## alla ormar
+    for snakes in data['snakes']['data']:  ## alla ormar
         x = (snakes['body']['data'][0]['x'])
         y = (snakes['body']['data'][0]['y'])
-        snake_heads.append((x,y))
+        snake_heads.append((x, y))
 
-        for pos in snakes['body']['data']: ## alla ormens positioner
+        for pos in snakes['body']['data']:  ## alla ormens positioner
             snakePositions.append((pos['x'], pos['y']))
 
-
+    snake_head_area = []
+    for snake_head in snake_heads:
+        snake_head_area.append((snake_head[0], snake_head[1]))
 
     walls = []
     width = data['height']
@@ -95,9 +95,6 @@ def move():
         walls.append((i, width))
 
     stuffToAvoid = []
-    
-    for heads in snake_heads:
-        stuffToAvoid.append(heads)
 
     for position in myPositions:
         stuffToAvoid.append(position)
@@ -136,8 +133,8 @@ def move():
     xdistancetofood = abs(xhead - closestFoodPos[0])
     ydistancetofood = abs(yhead - closestFoodPos[1])
 
-    #foodtotheright = ((xhead - closestFoodPos[0]) < 0)
-    #foodtothetop = ((yhead - closestFoodPos[1]) > 0)
+    # foodtotheright = ((xhead - closestFoodPos[0]) < 0)
+    # foodtothetop = ((yhead - closestFoodPos[1]) > 0)
 
     prioritymoves = []
 
@@ -153,45 +150,36 @@ def move():
     if (ydistancetofood >= xdistancetofood) and ((yhead - closestFoodPos[1]) < 0) and 'down' in possiblemoves:
         prioritymoves.append('down')
 
+    if (xhead + 1, yhead) in snake_head_area and 'right' in prioritymoves:
+        prioritymoves.remove('right')
+    # prioritymoves.append('right')
 
+    if (xhead - 1, yhead) in snake_head_area and 'left' in prioritymoves:
+        prioritymoves.remove('left')
+    # prioritymoves.append('left')
 
+    if (xhead, yhead + 1) in snake_head_area and 'down' in prioritymoves:
+        prioritymoves.remove('down')
+    # prioritymoves.append('down')
 
-    #if (xhead + 1, yhead) in snake_heads_area and 'right' in prioritymoves:
-    #    prioritymoves.remove('right')
-        #prioritymoves.append('right')
-
-
-    #if (xhead - 1, yhead) in snake_heads_area and 'left' in prioritymoves:
-    #    prioritymoves.remove('left')
-        #prioritymoves.append('left')
-
-
-    #if (xhead, yhead + 1) in snake_heads_area and 'down' in prioritymoves:
-    #    prioritymoves.remove('down')
-        #prioritymoves.append('down')
-
-
-    #if (xhead, yhead - 1) in snake_heads_area and 'up' in prioritymoves:
-    #    prioritymoves.remove('up')
-        #prioritymoves.append('up')
-
-
+    if (xhead, yhead - 1) in snake_head_area and 'up' in prioritymoves:
+        prioritymoves.remove('up')
+    # prioritymoves.append('up')
 
     prioritymoves.append(random.choice(possiblemoves))
     direction = prioritymoves[0]
-
 
     return move_response(direction)
 
 
 # int x,y or tuple (NEXT STEP)
 
+##Only looks for dead end
 def safe_path(x, y, stuffToAvoid):
-
-    right = (x+1, y)
-    left = (x-1, y)
-    down = (x, y+1)
-    up = (x, y-1)
+    right = (x + 1, y)
+    left = (x - 1, y)
+    down = (x, y + 1)
+    up = (x, y - 1)
 
     if right in stuffToAvoid and left in stuffToAvoid and down in stuffToAvoid and up in stuffToAvoid:
         safe = False
@@ -199,6 +187,7 @@ def safe_path(x, y, stuffToAvoid):
         safe = True
 
     return safe
+
 
 ##def snake_head_area(snake_heads, my_head):
 ##    avoid_heads = []
@@ -212,7 +201,6 @@ def safe_path(x, y, stuffToAvoid):
 ##        avoid_heads.append((heads[0], heads[1] - 1))
 ##
 ##    return avoid_heads
-
 
 
 # def safetyLevel(x,y, stuffToAvoid):
