@@ -100,11 +100,11 @@ def move():
 
     possiblemoves = []
 
-    if (xhead + 1, yhead) not in stuffToAvoid and safe_path(xhead, yhead-1, stuffToAvoid):
+    if (xhead + 1, yhead) not in stuffToAvoid and safe_path(xhead+1, yhead, stuffToAvoid):
         possiblemoves.append('right')
-    if (xhead, yhead + 1) not in stuffToAvoid and safe_path(xhead, yhead-1, stuffToAvoid):
+    if (xhead, yhead + 1) not in stuffToAvoid and safe_path(xhead, yhead+1, stuffToAvoid):
         possiblemoves.append('down')
-    if (xhead - 1, yhead) not in stuffToAvoid and safe_path(xhead, yhead-1, stuffToAvoid):
+    if (xhead - 1, yhead) not in stuffToAvoid and safe_path(xhead-1, yhead, stuffToAvoid):
         possiblemoves.append('left')
     if (xhead, yhead - 1) not in stuffToAvoid and safe_path(xhead, yhead-1, stuffToAvoid):
         possiblemoves.append('up')
@@ -178,7 +178,7 @@ def safe_path(x, y, stuffToAvoid):
 
     if x+1 and x-1 and y+1 and y-1 in stuffToAvoid:
         safe = False
-        
+
     return safe
 
 
