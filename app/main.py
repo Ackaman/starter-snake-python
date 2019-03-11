@@ -82,6 +82,8 @@ def move():
         for pos in snakes['body']['data']:  ## alla ormens positioner
             snakePositions.append((pos['x'], pos['y']))
 
+    snake_heads.remove(my_head)
+
     snake_head_area = []
     for snake_head in snake_heads:
         snake_head_area.append((snake_head[0]-1, snake_head[1]))
