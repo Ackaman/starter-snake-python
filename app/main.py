@@ -75,8 +75,8 @@ def move():
     snake_heads = []
 
     for snakes in data['snakes']['data']:  ## alla ormar
-        x = (snakes['body']['data'][0]['x'])
-        y = (snakes['body']['data'][0]['y'])
+        x = snakes['body']['data'][0]['x']
+        y = snakes['body']['data'][0]['y']
         snake_heads.append((x, y))
 
         for pos in snakes['body']['data']:  ## alla ormens positioner
@@ -84,7 +84,10 @@ def move():
 
     snake_head_area = []
     for snake_head in snake_heads:
-        snake_head_area.append((snake_head[0], snake_head[1]))
+        snake_head_area.append((snake_head[0]-1, snake_head[1]))
+        snake_head_area.append((snake_head[0]+1, snake_head[1]))
+        snake_head_area.append((snake_head[0], snake_head[1]+1))
+        snake_head_area.append((snake_head[0], snake_head[1]-1))
 
     walls = []
     width = data['height']
